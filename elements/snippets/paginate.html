@@ -1,0 +1,20 @@
+<nav class="row pagination">
+    <div class="d-flex align-items-stretch justify-content-center">
+        {% if paginate.params.pageCount > 1 %}
+            {% if paginate.hasPrev %}
+                {{ paginate.prev('<', {'class': 'link d-flex align-items-center justify-content-center'}) }}
+            {% endif %}
+         
+            {{ paginate.numbers({
+                'modulus': 5,
+                'separator': '',
+                'class': 'link d-flex align-items-center justify-content-center',
+                'currentClass': 'current'
+            }) }}
+         
+            {% if paginate.hasNext %}
+                {{ paginate.next('>', {'class': 'link d-flex align-items-center justify-content-center'}) }}
+            {% endif %}
+        {% endif %}
+    </div>
+</nav>

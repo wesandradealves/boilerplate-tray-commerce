@@ -1,0 +1,72 @@
+{% if product.available %}
+<div class="clearfix wrapper-btn-buy d-flex align-items-stretch flex-wrap">
+    <div data-app="product.quantity" class="product-quantity clearfix">
+        <div class="d-flex align-items-stretch inner">
+            <span class="d-flex justify-content-center align-items-center flex-fill" id="plus" onclick="process(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                  <path d="M16.059 11.5003C16.0591 11.5661 16.0462 11.6313 16.0211 11.692C15.9959 11.7528 15.9591 11.808 15.9125 11.8545C15.866 11.901 15.8108 11.9379 15.75 11.963C15.6893 11.9881 15.6241 12.001 15.5583 12.0009L7.07306 12.0001C6.94029 12.0001 6.81296 11.9474 6.71908 11.8535C6.6252 11.7596 6.57247 11.6322 6.57248 11.4994C6.57249 11.3667 6.62525 11.2393 6.71915 11.1455C6.81304 11.0516 6.94038 10.9989 7.07316 10.9989L15.5584 10.9997C15.6242 10.9996 15.6893 11.0125 15.7501 11.0376C15.8109 11.0628 15.8661 11.0996 15.9126 11.1461C15.9591 11.1927 15.996 11.2479 16.0211 11.3087C16.0462 11.3694 16.0591 11.4346 16.059 11.5003Z" fill="#A0A1A0"/>
+                </svg>
+            </span>
+            <input id="quant" name="quant" class="text d-flex justify-content-center align-items-center flex-fill" size="1" type="text" value="1" maxlength="5" />
+            <span class="d-flex justify-content-center align-items-center flex-fill" id="minus" ty onclick="process(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8 2.5C8.13261 2.5 8.25979 2.55268 8.35355 2.64645C8.44732 2.74021 8.5 2.86739 8.5 3V8H13.5C13.6326 8 13.7598 8.05268 13.8536 8.14645C13.9473 8.24021 14 8.36739 14 8.5C14 8.63261 13.9473 8.75979 13.8536 8.85355C13.7598 8.94732 13.6326 9 13.5 9H8.5V14C8.5 14.1326 8.44732 14.2598 8.35355 14.3536C8.25979 14.4473 8.13261 14.5 8 14.5C7.86739 14.5 7.74021 14.4473 7.64645 14.3536C7.55268 14.2598 7.5 14.1326 7.5 14V9H2.5C2.36739 9 2.24021 8.94732 2.14645 8.85355C2.05268 8.75979 2 8.63261 2 8.5C2 8.36739 2.05268 8.24021 2.14645 8.14645C2.24021 8.05268 2.36739 8 2.5 8H7.5V3C7.5 2.86739 7.55268 2.74021 7.64645 2.64645C7.74021 2.55268 7.86739 2.5 8 2.5Z" fill="#151515"/>
+                </svg>                
+            </span>
+        </div>
+    </div>
+    
+    {% set attribute = 'data-url="/loja/termo_aceite.php?loja='~store.id~'&idProduto='~product.id~'&store=1" data-title="TERMO DE ACEITAÇÃO" data-modal-width="700px" data-modal-height="400px" data-toggle="modal" data-target="#modal-form"' %}
+    
+    {% if pages.current == 'product' %}
+        
+        {% if productHelper.variants() %}
+        
+            <button disabled type="submit" data-variant="" class="product-buy-button flex-fill btn" data-app="product.buy-button" data-product="{{ product.id }}" data-page="produto">
+                <span>Comprar</span>
+            </button>   
+        
+        {% else %}
+        
+            <button type="submit" class="product-buy-button flex-fill btn" data-app="product.buy-button" data-product="{{ product.id }}" data-page="produto">
+                <span>Comprar</span>
+            </button>    
+            
+        {% endif %}
+    
+    {% endif %}
+    
+    <!--{% if not Image('buy') %}-->
+    <!--<button type="submit" class="product-buy-button flex-fill" data-app="product.buy-button" data-product="{{ product.id }}" data-page="produto" {{ product.has_acceptance_terms == 1 ? attribute }}>-->
+    <!--    <span>Comprar</span>-->
+    <!--</button>-->
+    <!--{% else %}-->
+    <!--<div data-app="product.buy-button" id="bt_comprar" class="remove-bg" align="left">-->
+    <!--    <button id="button-buy" data-tray-tst="button_buy_product" data-product="{{ product.id }}" data-page="produto" type="submit" {{ product.has_acceptance_terms == 1 ? attribute }}>-->
+    <!--        {{ Image('buy') }}-->
+    <!--    </button>-->
+    <!--</div>-->
+    <!--{% endif %}-->
+    
+    <span id="span_erro_carrinho" class="blocoAlerta" style="display:none;">Selecione opções de variações do produto.</span>
+</div>
+<script type="text/javascript">function process(quant){var value = parseInt(document.getElementById("quant").value);value+=quant;if( value > 0){document.getElementById("quant").value = value;	}} </script>
+
+{% endif %}
+
+<script>
+
+    let $variations = document.querySelectorAll('.lista_cor_variacao li');
+    let $btnBuy = document.querySelector('.wrapper-btn-buy');
+
+    $variations.forEach(element => {
+        element.addEventListener('click', (event)=>{
+          if(element.classList.contains('sem_estoque')){
+            $btnBuy.classList.add('tray-hide')
+          }else{
+            $btnBuy.classList.remove('tray-hide')
+          }
+        });
+    });
+     
+</script>

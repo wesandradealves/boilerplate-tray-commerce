@@ -1,0 +1,523 @@
+[
+    {
+      "label": "Minha loja",
+      "icon": "store",
+      "sessions": [
+        {
+          "label": "Redes Sociais",
+          "description": "Informe suas Redes sociais para poder interagir com os seu clientes. Lembre de colocar o link completo",
+          "fields": [
+            {
+              "label": "Instagram",
+              "type": "text",
+              "description": "",
+              "placeholder": "",
+              "icon": "instagram",
+              "field": "instagram_profile",
+              "validation": "required:false"
+            },
+            {
+              "label": "Facebook",
+              "type": "text",
+              "description": "",
+              "placeholder": "",
+              "icon": "facebook",
+              "field": "facebook_profile",
+              "validation": "required:false"
+            },
+            {
+              "label": "Twitter",
+              "type": "text",
+              "description": "",
+              "placeholder": "",
+              "icon": "twitter",
+              "field": "twitter_profile",
+              "validation": "required:false"
+            },
+            {
+              "label": "Pinterest",
+              "type": "text",
+              "description": "",
+              "placeholder": "",
+              "icon": "pinterest",
+              "field": "pinterest_profile",
+              "validation": "required:false"
+            },
+            {
+              "label": "Linkedin",
+              "type": "text",
+              "description": "",
+              "placeholder": "",
+              "icon": "linkedin",
+              "field": "linkedin_profile",
+              "validation": "required:false"
+            },
+            {
+              "label": "Youtube",
+              "type": "text",
+              "description": "",
+              "placeholder": "",
+              "icon": "youtube",
+              "field": "youtube_profile",
+              "validation": "required:false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Cores",
+      "icon": "swatchbook",
+      "sessions": [
+        {
+          "label": "Cor dos textos",
+          "description": "Cores aplicadas nos textos da loja",
+          "fields": [
+            {
+              "label": "Cor dos textos 1",
+              "type": "color",
+              "description": "Aplicada, por exemplo, nos t\u00EDtulos",
+              "placeholder": "",
+              "field": "color_font_medium",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos textos 2",
+              "type": "color",
+              "description": "Aplicada, por exemplo, nos t\u00EDtulos dos blocos e nome dos produtos",
+              "placeholder": "",
+              "field": "color_font_dark",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos textos 3",
+              "type": "color",
+              "description": "Aplicada, por exemplo, nos valores de parcelamento",
+              "placeholder": "",
+              "field": "color_font_light",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos textos invertida",
+              "type": "color",
+              "description": "Cor inversa as cores acima. Exemplo: fonte branca para uso em bot\u00E3o escuro",
+              "placeholder": "",
+              "field": "color_font_inverted",
+              "validation": "required:false"
+            }
+          ]
+        },
+        {
+          "label": "Cores prim\u00E1rias",
+          "description": "Cores principais da loja",
+          "fields": [
+            {
+              "label": "Cor prim\u00E1ria 1",
+              "type": "color",
+              "description": "Aplicada, por exemplo, no valor de pre\u00E7o",
+              "placeholder": "",
+              "field": "color_primary_medium",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor prim\u00E1ria 2",
+              "type": "color",
+              "description": "Aplicada, por exemplo, no texto de avalia\u00E7\u00F5es do produto",
+              "placeholder": "",
+              "field": "color_primary_light",
+              "validation": "required:false"
+            }
+          ]
+        },
+        {
+          "label": "Cor secund\u00E1ria",
+          "description": "Cor secund\u00E1ria da loja",
+          "fields": [
+            {
+              "label": "Cor secund\u00E1ria",
+              "type": "color",
+              "description": "Aplicada, por exemplo, na cor de fundo do bot\u00E3o comprar",
+              "placeholder": "",
+              "field": "color_secondary_medium",
+              "validation": "required:false"
+            }
+          ]
+        },
+        {
+          "label": "Cores de borda/fundo",
+          "description": "Cores aplicadas nas bordas e fundo de alguns elementos da loja",
+          "fields": [
+            {
+              "label": "Cor de borda/fundo 1",
+              "type": "color",
+              "description": "Aplicada, por exemplo, na cor de fundo da busca e de depoimentos",
+              "placeholder": "",
+              "field": "color_gray_medium",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor de borda/fundo 2",
+              "type": "color",
+              "description": "Aplicada, por exemplo, na borda dos produtos e de fundo do campo de quantidade na interna do produto",
+              "placeholder": "",
+              "field": "color_gray_dark",
+              "validation": "required:false"
+            }
+          ]
+        },
+        {
+          "label": "Cabe\u00E7alho",
+          "fields": [
+            {
+              "label": "Cor de fundo do cabe\u00E7alho",
+              "type": "color",
+              "description": "Altera tamb\u00E9m a cor da fonte da quantidade no carrinho e do fundo do menu de subcategorias",
+              "placeholder": "",
+              "field": "color_header_bg",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos textos principais do cabe\u00E7alho",
+              "type": "color",
+              "description": "Altera a cor da fonte das categorias e do Minha Conta",
+              "placeholder": "",
+              "field": "color_header_main_font",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos textos secund\u00E1rios do cabe\u00E7alho",
+              "type": "color",
+              "description": "Altera a cor da fonte em Entrar/Cadastrar e do texto da busca",
+              "placeholder": "",
+              "field": "color_header_second_font",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos \u00EDcones do cabe\u00E7alho",
+              "type": "color",
+              "description": "Altera a cor dos \u00EDcones de busca, minha conta e carrinho",
+              "placeholder": "",
+              "field": "color_header_highlight",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor de fundo do carrinho",
+              "type": "color",
+              "description": "Altera a cor de fundo da quantidade do carrinho",
+              "placeholder": "",
+              "field": "color_header_cart_count",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor de fundo dos detalhes do cabe\u00E7alho",
+              "type": "color",
+              "description": "Altera a cor de fundo da busca e a cor da borda",
+              "placeholder": "",
+              "field": "color_header_details",
+              "validation": "required:false"
+            }
+          ]
+        },
+        {
+          "label": "Rodap\u00E9",
+          "fields": [
+            {
+              "label": "Cor de fundo do Rodap\u00E9",
+              "type": "color",
+              "description": "Altera tamb\u00E9m a cor da fonte do bot\u00E3o de newsletter",
+              "placeholder": "",
+              "field": "color_footer_bg",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos t\u00EDtulos do rodap\u00E9",
+              "type": "color",
+              "description": "Altera tamb\u00E9m a cor do t\u00EDtulo da newsletter",
+              "placeholder": "",
+              "field": "color_footer_main_font",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos textos do rodap\u00E9",
+              "type": "color",
+              "description": "Altera tamb\u00E9m a cor do subt\u00EDtulo da newsletter",
+              "placeholder": "",
+              "field": "color_footer_second_font",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor dos \u00EDcones do rodap\u00E9",
+              "type": "color",
+              "description": "Altera a cor dos \u00EDcones em atendimento e dos \u00EDcones das redes sociais",
+              "placeholder": "",
+              "field": "color_footer_highlight",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor do bot\u00E3o da newsletter",
+              "type": "color",
+              "description": "Altera a cor de fundo do bot\u00E3o da newsletter",
+              "placeholder": "",
+              "field": "color_footer_button",
+              "validation": "required:false"
+            },
+            {
+              "label": "Cor de fundo dos detalhes do rodap\u00E9",
+              "type": "color",
+              "description": "Altera a cor de fundo do input de newsletter e a cor da borda",
+              "placeholder": "",
+              "field": "color_footer_details",
+              "validation": "required:false"
+            }
+          ]
+        },
+        {
+           "label": "Selos",
+           "fields": [
+             {
+               "label": "Cor do texto do Selo",
+               "type": "color",
+               "description": "",
+               "placeholder": "",
+               "field": "color_seal",
+               "validation": "required:false"
+             },
+             {
+               "label": "Cor de fundo do Selo",
+               "type": "color",
+               "description": "",
+               "placeholder": "",
+               "field": "color_bg_seal",
+               "validation": "required:false"
+             }
+           ]
+        }
+      ]
+    },
+    {
+      "label": "Banners",
+      "icon": "image",
+      "sessions": [
+        {
+          "label": "Configura\u00E7\u00F5es do slide",
+          "description": "O cadastro dos banners \u00E9 feito pelo o painel da plataforma. As configura\u00E7\u00F5es de efeitos no cadastro do banner n\u00E3o ser\u00E1 refletidas no tema. Configure os efeitos e tempo de transi\u00E7\u00E3o do slide que aparece na p\u00E1gina inicial do tema.",
+          "fields": [
+            {
+              "label": "Deseja pausar o slide ao passar o mouse sobre ?",
+              "type": "toggle",
+              "description": "",
+              "field": "banner_home_stop_hover"
+            },
+            {
+              "label": "Tempo de exibi\u00E7\u00E3o de cada slide",
+              "type": "alert",
+              "description": "O tempo de exibi\u00E7\u00E3o de cada slide \u00E9 de 10 segundos. Esse valor n\u00E3o pode ser alterado.",
+              "field": "alert_tempo_slide"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Layout",
+      "icon": "columns",
+      "sessions": [
+        {
+          "label": "Vitrine de produtos",
+          "description": "Configure a vitrine de produtos para se adaptar perfeitamente ao seu produto e vender mais.",
+          "fields": [
+            {
+              "label": "Exibir produtos em ordem aleat\u00F3ria",
+              "type": "toggle",
+              "description": "",
+              "field": "showcase_rand_products"
+            },
+            {
+              "label": "Exibir selos do produto na listagem",
+              "type": "toggle",
+              "description": "",
+              "field": "show_product_seals_on_listing"
+            },
+            {
+              "type": "tab",
+              "field": "vitrine",
+              "options": [
+                {
+                  "value": "vitrine_1",
+                  "content": "Primeira vitrine de produtos"
+                },
+                {
+                  "value": "vitrine_2",
+                  "content": "Segunda vitrine de produtos"
+                }
+              ]
+            },
+            {
+              "label": "Tipo de vitrine",
+              "type": "select",
+              "description": "",
+              "field": "showcase_type_1",
+              "tab": "vitrine_1",
+              "options": [
+                {
+                  "value": "top_seller",
+                  "content": "Mais Vendidos"
+                },
+                {
+                  "value": "new",
+                  "content": "Lan\u00E7amentos"
+                },
+                {
+                  "value": "featured",
+                  "content": "Destaques"
+                },
+                {
+                  "value": "free_shipping",
+                  "content": "Frete Gr\u00E1tis"
+                },
+                {
+                  "value": "promotion",
+                  "content": "Promo\u00E7\u00E3o"
+                }
+              ]
+            },
+            {
+              "label": "Quantidade de produtos a ser exibido na vitrine",
+              "type": "radio",
+              "description": "",
+              "field": "showcase_quantity_1",
+              "tab": "vitrine_1",
+              "options": [
+                {
+                  "value": "4",
+                  "content": "4"
+                },
+                {
+                  "value": "8",
+                  "content": "8"
+                }
+              ]
+            },
+            {
+              "label": "Tipo de vitrine",
+              "type": "select",
+              "description": "",
+              "field": "showcase_type_2",
+              "tab": "vitrine_2",
+              "options": [
+                {
+                  "value": "top_seller",
+                  "content": "Mais Vendidos"
+                },
+                {
+                  "value": "new",
+                  "content": "Novidades"
+                },
+                {
+                  "value": "featured",
+                  "content": "Em destaque"
+                },
+                {
+                  "value": "free_shipping",
+                  "content": "Frete Gr\u00E1tis"
+                },
+                {
+                  "value": "promotion",
+                  "content": "Promo\u00E7\u00E3o"
+                }
+              ]
+            },
+            {
+              "label": "Quantidade de produtos a ser exibido na vitrine",
+              "type": "radio",
+              "description": "",
+              "field": "showcase_quantity_2",
+              "tab": "vitrine_2",
+              "options": [
+                {
+                  "value": "4",
+                  "content": "4"
+                },
+                {
+                  "value": "8",
+                  "content": "8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Depoimentos",
+          "description": "Configura\u00E7\u00F5es dos depoimentos na p\u00E1gina inicial",
+          "fields": [
+            {
+              "label": "Exibir bloco de depoimentos",
+              "type": "toggle",
+              "description": "",
+              "field": "show_reviews"
+            }
+          ]
+        },
+        {
+          "label": "Not\u00EDcias",
+          "description": "Configura\u00E7\u00F5es das not\u00EDcias na p\u00E1gina inicial",
+          "fields": [
+            {
+              "label": "Exibir bloco de not\u00EDcias",
+              "type": "toggle",
+              "description": "",
+              "field": "show_news"
+            }
+          ]
+        },
+        {
+          "label": "Newsletter",
+          "description": "Configura\u00E7\u00F5es da newsletter",
+          "fields": [
+            {
+              "label": "Exibir newsletter",
+              "type": "toggle",
+              "description": "",
+              "field": "news_active"
+            }
+          ]
+        },
+        {
+          "label": "Categorias e busca",
+          "description": "As op\u00E7\u00F5es abaixo afetam as p\u00E1ginas de categorias e a p\u00E1gina de busca",
+          "fields": [
+            {
+              "label": "Exibir filtro lateral",
+              "type": "toggle",
+              "description": "As op\u00E7\u00F5es abaixo afetam as p\u00E1ginas de categorias e a p\u00E1gina de busca",
+              "field": "show_filters_sidebar"
+            }
+          ]
+        },
+        {
+          "label": "P\u00E1gina do produto",
+          "fields": [
+            {
+              "label": "Exibir avalia\u00E7\u00F5es nos produtos",
+              "type": "toggle",
+              "description": "",
+              "field": "show_product_review"
+            },
+            {
+              "label": "Exibir produtos relacionados",
+              "type": "toggle",
+              "description": "",
+              "field": "enable_related_products"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "info": {
+        "documentation": "https://manuais-temas.netzee.com.br/theme-default-tray/",
+        "version": "1.2.26",
+        "support": "https://atendimento.tray.com.br/hc/pt-br/requests/new"
+      }
+    }
+  ]

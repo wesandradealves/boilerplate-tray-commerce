@@ -1,0 +1,61 @@
+{% element 'snippets/banner' %}
+{% element 'snippets/categorias-grid' %}
+{% element 'snippets/product-grid' {
+    "products": Products({
+        'categories': [7],
+        'order': {'quantity_sold': 'desc'}
+    }),
+    "title": "Ternos Mais Vendidos"
+} %}  
+
+{% if banner.extra2 %}
+    <section class="section banner-cta d-none d-lg-block">
+        <div class="container d-flex justify-content-center align-items-center">
+            {{ banner.extra2 }}
+        </div>
+    </section>
+{% endif %}
+
+{% if banner.extra3 %}
+    <section class="section banner-cta d-block d-lg-none">
+        <div class="container d-flex justify-content-center align-items-center">
+            {{ banner.extra3 }}
+        </div>
+    </section>
+{% endif %}
+
+{% element 'snippets/product-grid' {
+    "products": Products({
+        'categories': [9],
+        'order': {'title': 'desc'}
+    }),
+    "title": "Camisas Premium"
+} %}  
+
+{% if banner.extra4 %}
+    <section class="section banner-cta d-none d-lg-block">
+        <div class="container d-flex justify-content-center align-items-center">
+            {{ banner.extra4 }}
+        </div>
+    </section>
+{% endif %}
+
+{% if banner.extra5 %}
+    <section class="section banner-cta d-block d-lg-none">
+        <div class="container d-flex justify-content-center align-items-center">
+            {{ banner.extra5 }}
+        </div>
+    </section>
+{% endif %}
+
+{% element 'snippets/product-grid' {
+    "products": Products({
+        'order': {'title': 'desc'}
+    }),
+    "promocao": "sim",
+    "title": "Promoções Exclusivas"
+} %}  
+
+{% element 'snippets/ocasioes' %}
+
+{% element 'snippets/testimonials' %}

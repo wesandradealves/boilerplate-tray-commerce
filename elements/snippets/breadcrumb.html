@@ -1,0 +1,28 @@
+ <div class="breadcrumb">
+    <div class="container">
+        <nav>
+            <ul class="d-flex align-items-center">
+                <li class="breadcrumb-item d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M2 13.5V7H3V13.5C3 13.6326 3.05268 13.7598 3.14645 13.8536C3.24021 13.9473 3.36739 14 3.5 14H12.5C12.6326 14 12.7598 13.9473 12.8536 13.8536C12.9473 13.7598 13 13.6326 13 13.5V7H14V13.5C14 13.8978 13.842 14.2794 13.5607 14.5607C13.2794 14.842 12.8978 15 12.5 15H3.5C3.10218 15 2.72064 14.842 2.43934 14.5607C2.15804 14.2794 2 13.8978 2 13.5ZM13 2.5V6L11 4V2.5C11 2.36739 11.0527 2.24021 11.1464 2.14645C11.2402 2.05268 11.3674 2 11.5 2H12.5C12.6326 2 12.7598 2.05268 12.8536 2.14645C12.9473 2.24021 13 2.36739 13 2.5Z" fill="#5A5A5C"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M7.29363 1.50006C7.48116 1.31259 7.73547 1.20728 8.00063 1.20728C8.2658 1.20728 8.5201 1.31259 8.70763 1.50006L15.3546 8.14606C15.4485 8.23995 15.5013 8.36729 15.5013 8.50006C15.5013 8.63284 15.4485 8.76018 15.3546 8.85406C15.2607 8.94795 15.1334 9.00069 15.0006 9.00069C14.8679 9.00069 14.7405 8.94795 14.6466 8.85406L8.00063 2.20706L1.35463 8.85406C1.26074 8.94795 1.13341 9.00069 1.00063 9.00069C0.867856 9.00069 0.740518 8.94795 0.646632 8.85406C0.552745 8.76018 0.5 8.63284 0.5 8.50006C0.5 8.36729 0.552745 8.23995 0.646632 8.14606L7.29363 1.50006Z" fill="#5A5A5C"/>
+                    </svg>
+                    <a href="/">Home</a>
+                </li>
+                {% if pages.current == 'catalog' %}
+                    <li class="breadcrumb-item  d-flex align-items-center">{{category.name}}</li>
+                {% elseif pages.current == 'product' %}
+                    <li class="breadcrumb-item  d-flex align-items-center">{{product.name}}</li>
+                {% elseif pages.current == 'search' %}
+                    <li class="breadcrumb-item  d-flex align-items-center">Busca</li>
+                    <li class="breadcrumb-item  d-flex align-items-center">Resultados de busca {% if search.word %} para {{search.word}} {% endif %}</li>
+                {% else %}
+                    {% for page in pages.custom if page.slug == pages.current %}
+                        <li class="breadcrumb-item  d-flex align-items-center">{{page.name}}</li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+

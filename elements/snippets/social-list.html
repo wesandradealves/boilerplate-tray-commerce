@@ -1,0 +1,49 @@
+<ul class="social-list d-flex align-items-center justify-content-lg-between">
+    {% if settings.social_facebook %}
+    <li>
+        <a href="https://www.facebook.com/{{ settings.social_facebook }}" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_twitter %}
+    <li>
+        <a href="https://www.twitter.com/{{ settings.social_twitter }}" target="_blank">
+            <i class="fa-brands fa-twitter"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_youtube %}
+    <li>
+        <a href="https://www.youtube.com/{{ settings.social_youtube }}" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_pinterest %}
+    <li>
+        <a href="https://br.pinterest.com/{{ settings.social_pinterest }}" target="_blank">
+            <i class="fa-brands fa-pinterest"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if settings.social_instagram %}
+    <li>
+        <a href="https://www.instagram.com/{{ settings.social_instagram }}" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+    </li>
+    {% endif %}
+    
+    {% if settings.social_linkedin %}
+    <li>
+        <a href="https://www.linkedin.com/{{ settings.social_linkedin }}" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+        </a>
+    </li>
+    {% endif %}
+</ul>

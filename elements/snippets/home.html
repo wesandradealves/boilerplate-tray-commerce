@@ -1,0 +1,43 @@
+{% element 'snippets/banner' %}
+{% element 'snippets/categorias-grid' %}
+{% element 'snippets/product-grid' {
+    "products": Products({
+        'categories': [7],
+        'order': {'quantity_sold': 'desc'}
+    }),
+    "title": "Ternos Mais Vendidos"
+} %}  
+
+{% element 'snippets/product-grid' {
+    "products": Products({
+        'categories': [9],
+        'order': {'title': 'desc'}
+    }),
+    "title": "Camisas Premium"
+} %}  
+
+{% if banner.extra1 %}
+    <section class="section banner-cta">
+        <div class="container d-flex justify-content-center align-items-center">
+            {{ banner.extra1 }}
+        </div>
+    </section>
+{% endif %}
+
+{% element 'snippets/product-grid' {
+    "products": Products({
+        'order': {'title': 'desc'}
+    }),
+    "promocao": "Sim",
+    "title": "Promoções Exclusivas"
+} %}  
+
+<section class="section">
+ <div class="container">
+     <div class="section-title">
+         <h2 class="d-block title">Ocasiões</h2>
+     </div>
+ </div>
+</section>
+
+{% element 'snippets/testimonials' %}

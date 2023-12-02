@@ -1,0 +1,38 @@
+<section class="section product-grid">
+     <div class="container">
+        {% if title %}
+        <div class="section-title">
+            <h2 class="d-block title">{{title}}</h2>
+        </div>
+        {% endif %}
+        
+        {% if products|length > 0 %}
+            <div class="showcase" data-tray-tst="vitrine_home">
+                <div class="items">
+                    {% if promocao %}
+                        {% for product in products if product.properties['Promoção'] and product.properties['Promoção'][0]|lower == promocao %}
+                            {% set ranking = product.ranking %}
+                            <li id="{{ product.id }}" class="item" data-tray-tst="vitrine_produto" itemscope itemtype="https://schema.org/SomeProducts">
+                                {% element 'snippets/product' {"product": product} %}
+                            </li>
+                        {% endfor %}
+                    {% elseif related is defined %}
+                        {% for product in products if related.current != product.id %}
+                            {% set ranking = product.ranking %}
+                            <li id="{{ product.id }}" class="item" data-tray-tst="vitrine_produto" itemscope itemtype="https://schema.org/SomeProducts">
+                                {% element 'snippets/product' {"product": product} %}
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        {% for product in products %}
+                            {% set ranking = product.ranking %}
+                            <li id="{{ product.id }}" class="item" data-tray-tst="vitrine_produto" itemscope itemtype="https://schema.org/SomeProducts">
+                                {% element 'snippets/product' {"product": product} %}
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+     </div>
+</section>

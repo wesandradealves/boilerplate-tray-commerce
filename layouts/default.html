@@ -1,0 +1,137 @@
+{% spaceless %}
+<!doctype html>
+<html data-theme="{{ settings.extension_id }}" data-store="{{ store.id }}" class="page-{{ pages.current }}" data-theme-name="Tema Padr�o" data-theme-version="11.0.2">
+<head>
+    <!-- tray charset -->
+    {{ html.charset() }}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- tray meta tags -->
+    {{ tray.meta }}
+
+    <!-- tray styles -->
+    {{ tray.styles }}
+
+    <!-- theme styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/theme.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <!-- tray analytics -->
+    {{ tray.analytics }}
+
+    <!-- google tag manager -->
+    {{ googleTagManager.header(pages.current, tagManagerData) }}
+
+    {% if pages.current == "product" %}
+        {% element 'snippets/schema-product.html' %}
+    {% endif %}      
+</head>
+<body class="d-none overflow-x-hidden">
+    {{ googleTagManager.top(pages.current, tagManagerData) }}
+
+    {% element 'snippets/messages' %}
+
+    <!--<div class="application overflow-y-hidden">-->
+        
+        {% element 'snippets/cart-floating' %}
+        {% element 'snippets/my-account' %}
+        {% element 'snippets/menu-mobile' %}
+        {% element 'snippets/newsletter-modal' %}
+
+        {% element 'header' %}
+
+        <main class="site-main  overflow-x-hidden">
+            {% if pages.current != "home" and pages.current != "catalog" %}
+                {% element 'snippets/breadcrumb' %}
+            {% endif %}
+            
+            {% set slugs = [] %}
+            
+            {% for item in pages.custom %}
+                {% set slugs = slugs|merge([item.slug]) %}    
+            {% endfor %}   
+            
+            {% if pages.current in slugs %}
+                {% for item in pages.custom if item.slug == pages.current %}
+                    {% element 'snippets/page-header' {
+                        "title": item.name,
+                        "layout": 'default'
+                    } %}      
+                {% endfor %}          
+                
+                <section class="content">
+                    <div class="container">
+                        <div class="tabs d-flex align-items-stretch flex-wrap">
+                            <select class="tabs-mobile-nav mb-4 col-12 d-lg-none">
+                                {% for page in pages.custom %}
+                                    <option value="{{page.url}}">{{page.name}}</option>
+                                {% endfor %} 
+                            </select>
+                            <nav class="tabs-nav d-none d-lg-flex flex-column col-3">
+                                {% for page in pages.custom %}
+                                    <a class="tab tab-link {% if pages.current == page.slug %} active {% endif %}" data-tab="{{loop.index}}" href="{{page.url}}">{{page.name}}</a>
+                                {% endfor %} 
+                            </nav>
+                            <div class="tabs-content flex-fill">
+                                <article class="tab d-block" data-tab="0">
+                                    <h3 class="d-block title mb-4">
+                                        {% for page in pages.custom if page.slug == pages.current %}
+                                            {{page.name}}
+                                        {% endfor %}
+                                    </h3>
+                                    {{ content_for_layout }}
+                                </article>            
+                            </div>
+                        </div>
+                    </div>
+                </section>                
+            {% else %}
+                {{ content_for_layout }}
+            {% endif %}        
+        </main>
+
+        {% element 'footer' %}
+    <!--</div>-->
+
+    <!-- tray -->
+    {% element 'snippets/modal' %}
+    {{ googleTagManager.bottom(pages.current, tagManagerData) }}
+    {{ tray.scripts }}
+    {{
+            html.script({
+                '0' : tray.paths.js ~ 'dist/application.min.js?' ~ utils.assets_version,
+                '1' : tray.paths.js ~ 'init.js?' ~ utils.assets_version
+            })
+    }}
+    {% element 'snippets/pageview' %}
+    {{ store.chat }}
+
+    <!-- theme scripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('js/modules/cartDetails.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/base.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
+    
+
+    {% if settings.background_image %}
+    <style>
+        .application{ background-image: url('{{ asset(settings.background_image) }}'); }
+    </style>
+    {% endif %}
+    <style>#NavLogoTray {display: none!important;}</style>
+</body>
+</html>
+{% endspaceless %}

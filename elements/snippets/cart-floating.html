@@ -1,0 +1,26 @@
+ <div class="mini-cart d-flex" id="cart-details" data-total="" data-cart="{{links.cart}}">
+     <div class="cart-inner d-flex flex-column">
+        <div class="cart-header cart-details-title d-flex col-12 justify-content-between align-items-center">
+            <a href="{{ links.cart }}">
+                Minha Sacola
+            </a>
+            <a class="close-cart" href="javascript:void(0)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3183 2.6824C17.3765 2.74045 17.4227 2.80942 17.4542 2.88535C17.4857 2.96129 17.5019 3.04269 17.5019 3.1249C17.5019 3.20711 17.4857 3.28851 17.4542 3.36444C17.4227 3.44037 17.3765 3.50934 17.3183 3.5674L3.56829 17.3174C3.45093 17.4348 3.29176 17.5007 3.12579 17.5007C2.95982 17.5007 2.80065 17.4348 2.68329 17.3174C2.56593 17.2 2.5 17.0409 2.5 16.8749C2.5 16.7089 2.56593 16.5498 2.68329 16.4324L16.4333 2.6824C16.4913 2.62419 16.5603 2.57801 16.6362 2.54651C16.7122 2.515 16.7936 2.49878 16.8758 2.49878C16.958 2.49878 17.0394 2.515 17.1153 2.54651C17.1913 2.57801 17.2602 2.62419 17.3183 2.6824Z" fill="#151515"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.68362 2.6824C2.62541 2.74045 2.57923 2.80942 2.54773 2.88535C2.51622 2.96129 2.5 3.04269 2.5 3.1249C2.5 3.20711 2.51622 3.28851 2.54773 3.36444C2.57923 3.44037 2.62541 3.50934 2.68362 3.5674L16.4336 17.3174C16.551 17.4348 16.7101 17.5007 16.8761 17.5007C17.0421 17.5007 17.2013 17.4348 17.3186 17.3174C17.436 17.2 17.5019 17.0409 17.5019 16.8749C17.5019 16.7089 17.436 16.5498 17.3186 16.4324L3.56862 2.6824C3.51056 2.62419 3.44159 2.57801 3.36566 2.54651C3.28973 2.515 3.20833 2.49878 3.12612 2.49878C3.04391 2.49878 2.96251 2.515 2.88658 2.54651C2.81064 2.57801 2.74167 2.62419 2.68362 2.6824Z" fill="#151515"/>
+                </svg>  
+            </a>
+        </div>
+        <div class="content d-flex flex-column">
+            <div class="empty-content d-flex flex-column">
+                <div class="empty-header">
+                    <h2 class="d-block title text-center mb-4">Sua sacola está vazia</h2>
+                    <p class="d-block text text-center">Para efetuar a compra, navegue pelo site ou use a busca para encontrar seus produtos desejados.</p>
+                </div>
+                <img class="m-auto d-block img-fluid" src="{{ asset('img/sacola.svg') }}" alt="Carrinho vazio" />
+                <a class="close-cart btn" href="javascript:void(0)">Escolher produto</a>
+            </div>
+        </div>
+        <div class="resume mt-auto"></div>  
+     </div>
+</div>

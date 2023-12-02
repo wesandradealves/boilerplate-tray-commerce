@@ -1,0 +1,43 @@
+<div class="main-menu d-none d-lg-block">
+    <div class="container d-flex align-items-center justify-content-between">
+        <ul class="level1 flex-wrap d-flex justify-content-center align-items-stretch pe-5 flex-fill">
+            {% for level1 in categories if level1.slug != 'sales' %}
+                <li class="item-level1 flex-fill d-flex align-items-center justify-content-center">
+                    <a href="{{ level1.link }}" class="link-level1 text-center col-12" data-tray-tst="categoria_lvl_1">{{ level1.name }}</a>
+                    {% if level1.children %}
+                        <div class="level2 col-12">
+                            <ul>
+                                {% for level2 in level1.children %}
+                                    <li class="item-level2">
+                                        <a href="{{ level2.link }}" class="link-level2 text-center" data-tray-tst="categoria_lvl_2">{{ level2.name }}</a>
+                                        {% if level2.children %}
+                                            <div class="level3">
+                                                <ul>
+                                                    {% for level3 in level2.children %}
+                                                        <li class="item-level3">
+                                                            <a href="{{ level3.link }}" class="link-level3 text-center" data-tray-tst="categoria_lvl_3">{{ level3.name }}</a>
+                                                            {% if level3.children %}
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/loja/busca.php?somente_oferta=1&avancada=1&loja=1262505" title="Sales" class="btn helper d-none d-xl-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+              <path d="M6.5 4.5C6.5 4.89782 6.34196 5.27936 6.06066 5.56066C5.77936 5.84196 5.39782 6 5 6C4.60218 6 4.22064 5.84196 3.93934 5.56066C3.65804 5.27936 3.5 4.89782 3.5 4.5C3.5 4.10218 3.65804 3.72064 3.93934 3.43934C4.22064 3.15804 4.60218 3 5 3C5.39782 3 5.77936 3.15804 6.06066 3.43934C6.34196 3.72064 6.5 4.10218 6.5 4.5ZM5.5 4.5C5.5 4.36739 5.44732 4.24021 5.35355 4.14645C5.25979 4.05268 5.13261 4 5 4C4.86739 4 4.74021 4.05268 4.64645 4.14645C4.55268 4.24021 4.5 4.36739 4.5 4.5C4.5 4.63261 4.55268 4.75979 4.64645 4.85355C4.74021 4.94732 4.86739 5 5 5C5.13261 5 5.25979 4.94732 5.35355 4.85355C5.44732 4.75979 5.5 4.63261 5.5 4.5Z" fill="white"/>
+              <path d="M2.5 1H7.086C7.3512 1.00006 7.60551 1.10545 7.793 1.293L14.793 8.293C14.9805 8.48053 15.0858 8.73484 15.0858 9C15.0858 9.26517 14.9805 9.51947 14.793 9.707L10.207 14.293C10.0195 14.4805 9.76517 14.5858 9.5 14.5858C9.23484 14.5858 8.98053 14.4805 8.793 14.293L1.793 7.293C1.60545 7.10551 1.50006 6.8512 1.5 6.586V2C1.5 1.73478 1.60536 1.48043 1.79289 1.29289C1.98043 1.10536 2.23478 1 2.5 1ZM2.5 6.586L9.5 13.586L14.086 9L7.086 2H2.5V6.586Z" fill="white"/>
+            </svg>
+            
+            Sales
+        </a>    
+    </div>
+</div>

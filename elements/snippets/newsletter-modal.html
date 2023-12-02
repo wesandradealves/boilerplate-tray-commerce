@@ -1,0 +1,23 @@
+ <section class="newsletter-modal d-none align-items-center justify-content-center" data-tray-tst="newsletter_box">
+      <div class="container overflow-hidden d-flex flex-wrap flex-column flex-md-row align-items-stretch">
+          <a href="javascript:void(0)" class="close d-flex align-items-center justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3905 1.60947C10.4254 1.6443 10.4531 1.68568 10.472 1.73124C10.4909 1.7768 10.5007 1.82564 10.5007 1.87497C10.5007 1.92429 10.4909 1.97313 10.472 2.01869C10.4531 2.06425 10.4254 2.10563 10.3905 2.14047L2.14049 10.3905C2.07007 10.4609 1.97457 10.5004 1.87499 10.5004C1.7754 10.5004 1.6799 10.4609 1.60949 10.3905C1.53907 10.3201 1.49951 10.2246 1.49951 10.125C1.49951 10.0254 1.53907 9.92988 1.60949 9.85947L9.85949 1.60947C9.89432 1.57455 9.9357 1.54684 9.98126 1.52793C10.0268 1.50903 10.0757 1.4993 10.125 1.4993C10.1743 1.4993 10.2232 1.50903 10.2687 1.52793C10.3143 1.54684 10.3557 1.57455 10.3905 1.60947Z" fill="#151515"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M1.60968 1.60947C1.57476 1.6443 1.54705 1.68568 1.52815 1.73124C1.50924 1.7768 1.49951 1.82564 1.49951 1.87497C1.49951 1.92429 1.50924 1.97313 1.52815 2.01869C1.54705 2.06425 1.57476 2.10563 1.60968 2.14047L9.85968 10.3905C9.9301 10.4609 10.0256 10.5004 10.1252 10.5004C10.2248 10.5004 10.3203 10.4609 10.3907 10.3905C10.4611 10.3201 10.5007 10.2246 10.5007 10.125C10.5007 10.0254 10.4611 9.92988 10.3907 9.85947L2.14068 1.60947C2.10585 1.57455 2.06447 1.54684 2.01891 1.52793C1.97335 1.50903 1.92451 1.4993 1.87518 1.4993C1.82586 1.4993 1.77702 1.50903 1.73146 1.52793C1.6859 1.54684 1.64452 1.57455 1.60968 1.60947Z" fill="#151515"/>
+            </svg>              
+          </a>
+          <img class="d-flex img-fluid thumbnail" loading="lazy" src="{{ asset('img/newsletter.png') }}" />
+          <form class="flex-fill d-flex flex-column" action="{{ links.newsletter }}&v=js" method="post" name="newsletter" data-tray-tst="newsletter_form">
+                <h2 class="d-block title">Assine nossa news</h2>
+                <p class="d-block text">E ganhe 10% na primeira compra</p>
+                <div class="form-group d-flex flex-column">
+                    <input id="news-name" name="name" type="text" placeholder="{{ Translation('digitar_nome') }}" required>
+                    <input id="news-email" name="email" type="email" placeholder="{{ Translation('digitar_email') }}" data-tray-tst="newsletter_email" required>
+                    <button class="btn primary" data-tray-tst="newsletter_cadastrar">
+                        Quero receber 
+                    </button>
+                </div>
+                <p class="d-block obs text">Não divulgamos seu e-mail e nem enviamos spam.</p>
+          </form>  
+      </div>    
+</section>

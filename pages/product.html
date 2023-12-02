@@ -1,0 +1,119 @@
+ <section class="product-page" data-product-id="{{ product.id }}">
+    <div class="container d-flex flex-wrap align-items-xl-stretch">
+        {% if product.images %}
+            <div class="gallery d-flex flex-row flex-wrap">
+                <nav class="gallery-navigation-wrapper">
+                    <div class="gallery-navigation d-flex flex-column">
+                        {% for image in product.images %}
+                            <article class="col-12">
+                                <a class="gallery-link d-block {% if loop.index == 1 %} is-active {% endif %}" data-index="{{loop.index}}" href="javascript:void(0)">
+                                    <img class="img-fluid" src="{{image.small}}" loading="lazy" />
+                                </a>
+                            </article>
+                        {% endfor %}
+                    </div>                    
+                </nav>
+                
+                <div class="gallery-content flex-fill">
+                    {% for image in product.images %}
+                        <article data-index="{{loop.index}}" class="gallery-item {% if loop.index != 1 %} d-none {% endif %}">
+                            <div class="tags d-flex align-items-center flex-wrap">
+                                {% set replaceTags = {'src=': 'width="119" height="22" alt="Selo" src='} %}
+                                
+                                {% if settings.discount %}
+                                    {% set porcentagemDesconto = 100 - ( product.price_offer / product.price ) * 100 %}
+                                    {% if porcentagemDesconto < 100 %}
+                                      <div class="tag discount"> {{ porcentagemDesconto|number_format }}% off </div>
+                                    {% endif %}  
+                                {% endif %}  
+                                
+                                {% if product.new and Image('new') %}
+                                    <div class="tag new">
+                                        Novidade
+                                    </div>
+                                {% endif %}
+                    
+                                {% if product.featured and Image('featured') %}
+                                    <div class="tag featured">
+                                        Destaque
+                                    </div>
+                                {% endif %}
+                    
+                                {% if product.free_shipping and Image('free_shipping')  %}
+                                    <div class="tag free-shipping">
+                                        Frete Grátis
+                                    </div>
+                                {% endif %}   
+                            </div>         
+                            <img class="img-fluid zoom" src="{{image.large}}" loading="lazy" />
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="flex-fill product-info">
+            <form data-product-id="{{ product.id }}" id="form_comprar" method="post" data-app="product.buy-form" action="{{ links.cart_add ~ product.id }}">
+                
+                <h1 class="title d-block" itemprop="name">{{ product.name }} <small class="d-block ref">REF: {{product.reference}}</small></h1>
+                <div class="prices d-block">
+                    {{ productHelper.pricing() }}
+                </div>
+
+                {{ productHelper.variants() }}
+                
+                <a class="d-none d-md-flex align-items-center guia-de-medidas" href="javascript:void(0)">
+                    <img src="{{ asset('img/medida.png') }}" alt="Guia de medidas" />
+                    <span>Guia de medidas</span>
+                </a>
+                
+                {{ product.additional_information }}
+                
+                {% element 'snippets/botoes_qty' {'pages' : pages} %}
+                
+                {{ productHelper.shipping() }}
+                
+                <div class="shipping-result"></div>
+            </form>
+        </div>
+        <div class="col-12">
+            {% element 'snippets/product-tabs' { 'product' : product } %}
+            
+            {% if product.related_products %}
+                <div class="section product-grid">
+                     <div class="container">
+                        <div class="section-title">
+                            <h2 class="d-block title">Você também pode gostar</h2>
+                        </div>
+                        
+                        {% if product.related_products %}
+                            <div class="showcase" data-tray-tst="vitrine_home">
+                                <div class="items">
+                                    {% for related in product.related_products %}
+                                        <li class="item" data-tray-tst="vitrine_produto" itemscope itemtype="https://schema.org/SomeProducts">
+                                            {% element 'snippets/product' {"product": related} %}
+                                        </li>
+                                    {% endfor %}
+                                </div>
+                            </div>                
+                        {% endif %}  
+                     </div>
+                </div>
+            {% else %}
+                {% element 'snippets/product-grid' {
+                    'order': {
+                        'id': 'desc'
+                    }, 
+                    "products": Products({
+                        'categories': [product.category_id]
+                    }),
+                    "related": {
+                        'status': true,
+                        'current': product.id
+                    },
+                    "title": "Você também pode gostar"
+                } %}  
+            {% endif %}
+        </div>
+    </div>
+    {% element 'snippets/medidas' %}
+</section>

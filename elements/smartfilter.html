@@ -1,0 +1,176 @@
+{# Set tray variables to more semantic variables #}
+{% set filters_available = filter_options %}
+{% set applied_filters = filtered_options %}
+
+{% set filter_titles = {
+'categories' : 'Categorias',
+'prices' : 'Pre&ccedil;os',
+'availability' : 'Disponibilidade',
+'brands' : 'Marcas'
+} %}
+
+{% set filter_type_key = {
+'categories' : 'categories',
+'prices' : 'price',
+'availability' : 'availability',
+'brands' : 'brand'
+} %}
+
+<aside class="smartfilter d-none d-lg-block col-3 pe-5">
+    {% if pages.current == "catalog" %}
+        <h3 class="d-block title mb-5 col-12 catalog-title">{{category.name}}</h3>
+    {% elseif pages.current == "search" %}
+        <div class="section-title">
+            <h2 class="d-block title">{% if "somente_oferta" in store.current_url %} Ofertas {% else %} Busca {% endif %} <small class="d-block">Resultados de busca {% if search.word %} para "{{ search.word }}" {% endif %}</small></h2>
+        </div>
+    {% endif %}    
+    <form name="form-filter" method="get">
+        <div class="cart-header cart-details-title d-flex d-lg-none col-12 justify-content-between align-items-center">
+            <a href="{{ links.cart }}">
+                Filtro
+            </a>
+            <a class="close-cart" href="javascript:void(0)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3183 2.6824C17.3765 2.74045 17.4227 2.80942 17.4542 2.88535C17.4857 2.96129 17.5019 3.04269 17.5019 3.1249C17.5019 3.20711 17.4857 3.28851 17.4542 3.36444C17.4227 3.44037 17.3765 3.50934 17.3183 3.5674L3.56829 17.3174C3.45093 17.4348 3.29176 17.5007 3.12579 17.5007C2.95982 17.5007 2.80065 17.4348 2.68329 17.3174C2.56593 17.2 2.5 17.0409 2.5 16.8749C2.5 16.7089 2.56593 16.5498 2.68329 16.4324L16.4333 2.6824C16.4913 2.62419 16.5603 2.57801 16.6362 2.54651C16.7122 2.515 16.7936 2.49878 16.8758 2.49878C16.958 2.49878 17.0394 2.515 17.1153 2.54651C17.1913 2.57801 17.2602 2.62419 17.3183 2.6824Z" fill="#151515"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M2.68362 2.6824C2.62541 2.74045 2.57923 2.80942 2.54773 2.88535C2.51622 2.96129 2.5 3.04269 2.5 3.1249C2.5 3.20711 2.51622 3.28851 2.54773 3.36444C2.57923 3.44037 2.62541 3.50934 2.68362 3.5674L16.4336 17.3174C16.551 17.4348 16.7101 17.5007 16.8761 17.5007C17.0421 17.5007 17.2013 17.4348 17.3186 17.3174C17.436 17.2 17.5019 17.0409 17.5019 16.8749C17.5019 16.7089 17.436 16.5498 17.3186 16.4324L3.56862 2.6824C3.51056 2.62419 3.44159 2.57801 3.36566 2.54651C3.28973 2.515 3.20833 2.49878 3.12612 2.49878C3.04391 2.49878 2.96251 2.515 2.88658 2.54651C2.81064 2.57801 2.74167 2.62419 2.68362 2.6824Z" fill="#151515"/>
+                </svg>  
+            </a>
+        </div>
+        
+        <h4 class="d-block smartfilter-title mb-4">Todos os filtros</h4>
+
+        <input type="hidden" name="loja" value="{{ store.id }}">
+
+        {% if search.word %}
+        <input name="palavra_busca" type="hidden" value="{{ search.word }}">
+        {% endif %}
+
+        {% if category.id %}
+        <input type="hidden" name="categoria" value="{{ category.id }}">
+        {% endif %}
+
+        <ul class="filters">
+            
+            {% for filter_type, filter_data in filters_available %}
+            {% if filter_type == 'prices' %}
+
+            <li class="d-block">
+
+                <h4 class="smartfilter-section-title d-flex justify-content-between align-items-center mb-3">
+                    {{ filter_titles[filter_type] }} <i class="fa-solid fa-angle-down"></i>
+                </h4>
+
+                <ul class="filter d-none">
+                    <li class="filter-item price">
+                        {% set from = filter_data.buckets|first.from %}
+                        {% set to = filter_data.buckets|last.to %}     
+                        <span class="d-flex align-items-stretch justify-content-between prices mb-2">
+                            <input class="col-6" type="text" name="from" value="{{from}}" readonly />
+                            <input class="col-6" type="text" name="to" value="{{to}}" readonly />
+                        </span>
+                        <input type="hidden" name="prices" value="{{from}},{{to}}" readonly />
+                        <div class="slider mt-4"></div>
+                    </li>
+                </ul>
+
+            </li>
+
+            {% elseif filter_type == 'properties' %}
+
+            {% for property in filter_data.values %}
+            <li class="d-block" data-filter-type="{{ property.key | lower }}">
+
+                <h4 class="smartfilter-section-title d-flex justify-content-between align-items-center mb-3">
+                    {{ property.key }} <i class="fa-solid fa-angle-down"></i>
+                </h4>
+
+                <ul class="filter d-none">
+                    {% for item in property.values %}
+
+                    {% set item_type = item.entity == 'variants' ? 'variant' :
+                    'propertie' %}
+                    {% set label_for = 'property-' ~ property.key ~ '||' ~
+                    item.key %}
+
+                    {% set value = property.key ~ '||' ~ item.key %}
+                    {% set value_encoded = property.key_encoded ~ '||' ~
+                    item.key_encoded %}
+
+                    <li class="filter-item">
+                        <div class="checkbox">
+                            <input type="checkbox" class="filter-input"
+                                id="{{ label_for | lower }}"
+                                name="{{ item.entity }}[]"
+                                value="{{ value_encoded }}" {% if value in
+                                applied_filters[item_type] -%} checked {%- endif
+                                %}>
+                            <label class="d-block"
+                                for="{{ label_for | lower }}">
+                                <span class="d-block">{{ item.key }}</span>
+                            </label>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+
+            </li>
+            {% endfor %}
+
+            {% else %}
+
+            <li class="d-block">            
+                
+                <h4 class="smartfilter-section-title d-flex justify-content-between align-items-center mb-3">
+                    {{ filter_titles[filter_type] }} <i class="fa-solid fa-angle-down"></i>
+                </h4>
+
+                <ul class="filter d-none">
+                    
+                    {% set current = category %}
+                    {% set categories = categories %}     
+                    
+                    {% for category in categories if category.slug == current.slug and filter_type == 'categories' %}
+                        {% for item in category.children if category.children %}
+                            {% set filter_data = filter_data|merge(
+                                [{
+                                    'key': item.name|lower|replace(' ','-'),
+                                    'key_encoded': item.name,
+                                    'name': item.name
+                                }]
+                            ) %}
+                        {% endfor %}  
+                    {% endfor %}          
+                    
+                    {% for item in filter_data %}
+
+                    <li class="filter-item">
+                        <div class="checkbox">
+                            <input type="checkbox" class="filter-input"
+                                id="{{ filter_type ~ '-' ~ item.key | lower }}"
+                                name="{{ filter_type }}[]"
+                                value="{{ item.key_encoded }}" {% if item.key in
+                                applied_filters[filter_type_key[filter_type]] %}
+                                checked {% endif %}>
+                            <label class="d-block"
+                                for="{{ filter_type ~ '-' ~  item.key | lower }}">
+                                <span class="d-block">{{ item.name ? item.name : item.key }}</span>
+                            </label>
+                        </div>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+
+            </li>
+
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+        <button class="d-block mt-4" type="submit">
+            Mostrar ({{products | length}}) resultados
+        </button>
+
+    </form>
+</aside>

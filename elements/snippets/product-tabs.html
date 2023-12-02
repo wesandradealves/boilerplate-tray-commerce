@@ -1,0 +1,183 @@
+{% set link_classes = {
+    'description'     : 'description-link-tab',
+    'included_items'  : 'included-items-link-tab',
+    'warranty'        : 'warranty-link-tab',
+    'payment_methods' : 'payment-link-tab',
+    'comments'        : 'comments-link-tab'
+} %}
+
+{% set tabs_classes = {
+    'description'     : 'description-ab',
+    'warranty'        : 'warranty-tab',
+    'payment_methods' : 'payment-tab',
+    'comments'        : 'comments-tab'
+} %}
+
+{% set tabs = [] %}
+
+{% for key, tab in productTabs %}
+    {% if key == 'custom' or key == 'downloads' or 'AdditionalTab' in key %}
+
+        {% set tabs = tabs | merge({ (key) : tab }) %}
+
+    {% elseif key == 'payment_methods' %}
+        {% if product.available and (product.stock > 0 or settings.without_stock_sale) and not product.upon_request %}
+
+            {% set currentTab = {
+                'id'           : tab.id,
+                'container_id' : tab.container_id,
+                'description'  : tab.description,
+                'link_class'   : link_classes[key] ? link_classes[key] : 'custom-link-tab',
+                'tab_class'    : tabs_classes[key] ? tabs_classes[key] : 'custom-tab',
+                'active_class' : loop.first ? 'active' : ''
+            } %}
+
+            {% if tab.url %}
+                {% set currentTab = currentTab | merge({ 'url' : tab.url }) %}
+            {% endif %}
+
+            {% set tabs = tabs | merge({ (key) : currentTab }) %}
+
+        {% endif %}
+    {% else %}
+
+        {% set currentTab = {
+            'id'           : tab.id,
+            'container_id' : tab.container_id,
+            'description'  : tab.description,
+            'link_class'   : link_classes[key] ? link_classes[key] : 'custom-link-tab',
+            'tab_class'    : tabs_classes[key] ? tabs_classes[key] : 'custom-tab',
+            'active_class' : loop.first ? 'active' : ''
+        } %}
+
+        {% if tab.url %}
+            {% set currentTab = currentTab | merge({ 'url' : tab.url }) %}
+        {% endif %}
+
+        {% set tabs = tabs | merge({ (key) : currentTab }) %}
+
+    {% endif %}
+{% endfor %}
+
+{% set allowed = ['description','properties','payment_methods'] %}
+
+<div class="product-tabs d-none d-lg-block">
+    <input name="storeId" value="{{store.id}}" type="hidden" />
+    <input name="productId" value="{{product.id}}" type="hidden" />
+    <input name="price" value="{{product.price}}" type="hidden" />
+    
+    <ul class="tabs-nav d-flex justify-content-center align-items-stretch flex-wrap">
+        {% for key, tab in tabs if key in allowed %}
+            {% if tab.container_id %}
+    
+                <li data-tab="{{loop.index}}" class="tab flex-fill d-flex justify-content-center align-items-center {% if loop.index == 1 %} active {% endif %}">
+                    <span class="text d-flex justify-content-center align-items-center flex-column">
+                        {{ tab.description }}
+                    </span>
+                </li>
+    
+            {% endif %}
+        {% endfor %}
+    </ul>
+    
+    <div class="tabs-content d-block">
+        {% for key, tab in tabs if key in allowed %}
+            {# Tab content #}
+            {% set tab_id = tab.container_id | replace({ '#' : '' }) %}
+    
+            {% if key != 'custom' and 'AdditionalTab' not in key %}
+    
+                {% set rte_class = (key == 'description' or key == 'warranty' or key == 'included_items' or key == 'datasheet') ? 'rte' : '' %}
+    
+                <div data-tab="{{loop.index}}" class="tab {{ key }} {% if loop.index == 1 %} d-block {% else %} d-none {% endif %}" id="{{ tab_id }}" {% if key == 'payment_methods' %} data-loaded-price="" {% endif %} {% if tab.url %} data-url="{{ tab.url }}" {% endif %}>
+    
+                    {% if key == 'description' %}
+    
+                        {{ product.description ? product.description : product.description_small }}
+    
+                    {% elseif key == 'included_items' %}
+    
+                        Itens inclusos: {{ product.included_items }}
+    
+                    {% elseif key == 'comments' %}
+    
+                        {%- set productComments -%}
+                            {%- element 'product/comments' -%}
+                        {%- endset -%}
+    
+                        <div id="tray-comment-block"></div>
+                        <script> window.commentsBlock = `{{ productComments | raw }}`; </script>
+    
+                    {% elseif key == 'downloads' %}
+    
+                        {{ tab.content }}
+    
+                    {% elseif key == 'properties' %}
+    
+                        {% element 'product/properties' %}
+    
+                    {% endif %}
+    
+                </div>
+    
+            {% elseif key == 'custom' %}
+                {{ tab.content | replace({ 'prodBox' : 'tab rte custom-tab' }) }}
+            {% endif %}
+    
+        {% endfor %}
+    
+    </div>
+</div>
+
+<div class="mobile-tabs d-lg-none">
+    {% for key, tab in tabs if key in allowed %}
+        {# Tab content #}
+        {% set tab_id = tab.container_id | replace({ '#' : '' }) %}
+
+        {% if key != 'custom' and 'AdditionalTab' not in key %}
+
+            {% set rte_class = (key == 'description' or key == 'warranty' or key == 'included_items' or key == 'datasheet') ? 'rte' : '' %}
+
+            <article>
+                <h3 class="d-flex title align-items-center justify-content-between">
+                    {{tab.description}} <i class="fa-solid fa-angle-down"></i>
+                </h3>
+                <div data-tab="{{loop.index}}" class="tab d-none {{key}}" id="{{ tab_id }}" {% if key == 'payment_methods' %} data-loaded-price="" {% endif %} {% if tab.url %} data-url="{{ tab.url }}" {% endif %}>
+    
+                    {% if key == 'description' %}
+    
+                        {{ product.description ? product.description : product.description_small }}
+    
+                    {% elseif key == 'included_items' %}
+    
+                        Itens inclusos: {{ product.included_items }}
+    
+                    {% elseif key == 'comments' %}
+    
+                        {%- set productComments -%}
+                            {%- element 'product/comments' -%}
+                        {%- endset -%}
+    
+                        <div id="tray-comment-block"></div>
+                        <script> window.commentsBlock = `{{ productComments | raw }}`; </script>
+    
+                    {% elseif key == 'downloads' %}
+    
+                        {{ tab.content }}
+    
+                    {% elseif key == 'properties' %}
+    
+                        {% element 'product/properties' %}
+    
+                    {% endif %}
+    
+                </div>
+            </article>
+
+        {% elseif key == 'custom' %}
+            {{ tab.content | replace({ 'prodBox' : 'tab rte custom-tab' }) }}
+        {% endif %}
+
+    {% endfor %}
+
+</div>
